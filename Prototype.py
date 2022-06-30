@@ -41,12 +41,15 @@ class BLOCKCHAIN:
         block_string = json.dumps(block, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
 
+#creates app and the object of the class BLOCKCHAIN
+app = Flask(__name__)
+blockchain = BLOCKCHAIN()
 
 #/mine is the command to mine blocks 
 @app.route('/mine', methods=['GET'])
 def mine():
     #loops to mine a certain number of blocks 
-    for _ in range(1):
+    for _ in range(600):
         previous_block = blockchain.print_previous_block()
         previous_proof = previous_block['proof']
         proof = blockchain.PoW(previous_proof)
@@ -63,9 +66,7 @@ def mine():
 
 #working on displaying and checking if valid here
 
-#creates app and the object of the class BLOCKCHAIN
-app = Flask(__name__)
-blockchain = BLOCKCHAIN()
+
 
 
 # Run the flask server locally
